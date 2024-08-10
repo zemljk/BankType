@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Credit Offers</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
+</head>
+<body>
+<h1>Credit Offers</h1>
+
+<a th:href="@{/creditOffer/create}">Create New Credit Offer</a>
+
+<table class="table" th:if="${creditOffers != null and !creditOffers.isEmpty()}">
+    <thead>
+    <tr>
+        <th>Credit Sum</th>
+        <th>Months</th>
+        <th>Client</th>
+        <th>Credit</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="creditOffer : ${creditOffers}">
+        <td th:text="${creditOffer.creditSum}"></td>
+        <td th:text="${creditOffer.monthsOfCredit}"></td>
+        <td th:text="${creditOffer.client.name} + ' ' + ${creditOffer.client.surname}"></td>
+        <td th:text="${creditOffer.credit.name}"></td>
+        <td>
+            <a th:href="@{/creditOffer/{id}(id=${creditOffer.id})}">View</a>
+            <a th:href="@{/creditOffer/{id}/delete(id=${creditOffer.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:if="${creditOffers == null or creditOffers.isEmpty()}">
+    <p>No credit offers found.</p>
+</div>
+
+
+</body>
+</html>

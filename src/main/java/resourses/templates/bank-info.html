@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bank Information</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
+
+</head>
+<body>
+<h1>Bank Information: <span th:text="${bank.name}"></span></h1>
+
+<a th:href="@{/bank/banks}">Back to Banks List</a>
+
+<h2>Clients</h2>
+<table class="table" th:if="${bank.clients != null}">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Passport Number</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="client : ${bank.clients}">
+        <td th:text="${client.name}"></td>
+        <td th:text="${client.surname}"></td>
+        <td th:text="${client.email}"></td>
+        <td th:text="${client.phoneNumber}"></td>
+        <td th:text="${client.passportNumber}"></td>
+        <td>
+            <a th:href="@{/client/{id}(id=${client.id})}">View Client Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Credit Offers for Clients</h2>
+<table class="table" th:if="${creditOffersForAllClients != null}">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Credit Sum</th>
+        <th>Months of Credit</th>
+        <th>Client</th>
+        <th>Credit</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="creditOffer : ${creditOffersForAllClients}">
+        <td th:text="${creditOffer.id}"></td>
+        <td th:text="${creditOffer.creditSum}"></td>
+        <td th:text="${creditOffer.monthsOfCredit}"></td>
+        <td th:text="${creditOffer.client.name + ' ' + creditOffer.client.surname}"></td>
+        <td th:text="${creditOffer.credit.name}"></td>
+        <td>
+            <a th:href="@{/creditOffer/{id}(id=${creditOffer.id})}">View Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Credit Information</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet">
+
+</head>
+<body>
+<h1>Credit Information: <span th:text="${credit.name}"></span></h1>
+
+<a th:href="@{/credit/credits}">Back to Credits List</a>
+
+<h2>Credit Offers</h2>
+<table class="table" th:if="${credit.creditOffers != null}">
+    <thead>
+    <tr>
+        <th>Credit Sum</th>
+        <th>Months</th>
+        <th>Client</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="creditOffer : ${credit.creditOffers}">
+        <td th:text="${creditOffer.creditSum}"></td>
+        <td th:text="${creditOffer.monthsOfCredit}"></td>
+        <td th:text="${creditOffer.client.name} + ' ' + ${creditOffer.client.surname}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
